@@ -1,0 +1,67 @@
+﻿body {
+}
+.watermark {
+    color: #d0d0d0;
+    font-size: 250px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    position: sticky;
+    width: 60%;
+    height: 0vh;
+    margin: 0px auto;
+    z-index: 999;
+    display: flex;
+    font-weight: 600;
+    top: 0.5em;
+    left: 0.5em;
+}
+/* solution 1:*/
+.datepicker {
+    font-size: 14px;
+}
+    /* solution 2: the original datepicker use 20px so replace with the following:*/
+
+    .datepicker td, .datepicker th {
+        width: 2em;
+        height: 2em;
+    }
+.headertop {
+    background-color: #00CED1;
+}
+.formdivstyle1 {
+    margin: 0 auto;
+}
+.h5T {
+    color:#3333CC;
+}
+.tableCt {
+    width: 100%;
+    border: thin;
+}
+table .thct {
+    width: 25%;
+    text-align: left;
+}
+
+
+@media print {
+    img {
+        -webkit-print-color-adjust: exact;
+    }
+
+    .watermark {
+        color: #d0d0d0;
+        font-size: 250px;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        position: sticky;
+        width: 60%;
+        height: 0vh;
+        margin: 0px auto;
+        z-index: 999;
+        display: flex;
+        font-weight: 600;
+        top: 0.5em;
+        left: 0.5em;
+    }
+}

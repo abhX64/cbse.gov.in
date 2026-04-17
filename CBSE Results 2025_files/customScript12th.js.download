@@ -1,0 +1,90 @@
+﻿document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("refCaptcha").addEventListener("click", function () {
+        captcha();
+    });
+    document.getElementById("Button2").addEventListener("click", function () {
+        window.location.reload();
+    });
+    //document.getElementById("printresult").addEventListener("click", function () {
+    //    var win_print = document.getElementById("to_print");
+    //    customePrint(win_print);
+    //});
+});
+$(document).ready(function () {
+    var start = new Date(1972, 0, 1); // Example start date
+    var end = new Date(); // Current date
+    var dob = document.getElementById("DateDOB")
+    if (dob != null) {
+        $('#DateDOB').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            minDate: start,
+            maxDate: end,
+            yearRange: '-52:+0',
+            onSelect: function (dateText, inst) {
+                $(inst).val(dateText);
+            }
+        });
+
+        // Prevent default action when clicking the input field
+        $('#DateDOB').on('click', function () {
+            return false;
+        });
+    }
+
+});
+
+function captcha() {
+    $.ajax({
+        type: 'POST',
+        url: captchaUrl, // Use the passed URL
+        cache: false,
+        success: function (html) {
+            var img = document.getElementById('capimage');
+            img.src = '';
+            img.src = captchaUrl + '?' + new Date().getTime(); // Prevent browser caching
+        },
+        error: function (response) {
+            console.log("Failed to refresh CAPTCHA.");
+        }
+    });
+}
+
+function customePrint(id) {
+    //document.getElementById("printresult").style.display = "none";
+    document.getElementById("close").style.display = "none";
+    let prtContent = id;// document.getElementById(id);
+    var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+    var is_chrome = Boolean(WinPrint.chrome);
+    WinPrint.document.write('<html><head><title>CBSE - Senior School Certificate Examination (Class XII) Results 2025</title>');
+    WinPrint.document.write('<link href="~/App_Themes/classic/css/bootstrap.min.css" rel="stylesheet" />');
+    WinPrint.document.write('<link rel="stylesheet" type="text/css" href="~/App_Themes/classic/css/own.css">');
+    WinPrint.document.write('</head><body>');
+    WinPrint.document.write(prtContent.innerHTML);
+    WinPrint.document.write('</body>');
+    WinPrint.document.close();
+    if (is_chrome) {
+        WinPrint.onload = function () {
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+        };
+    }
+    else {
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+    document.getElementById("printresult").style.display = "inline-block";
+    document.getElementById("close").style.display = "inline-block";
+}
+
+window.history.forward(); function noBack() { window.history.forward(); }
+function burstCache() {
+    if (!navigator.onLine) {
+        window.location = "../Home.html";
+    }
+}
+history.go(1);
